@@ -18,6 +18,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+
 const secretKey = 'ecda1cd47fd1c30ae4cb4fd56042ffac4ba5708acd7f80a20b76bce843e6d8a7';
 
 function authenticateToken(req, res, next) {
@@ -67,6 +68,7 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
     res.status(500).json({ message: 'Server Error' });
   }
 });
+
 
 
 
