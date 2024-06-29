@@ -6,13 +6,12 @@ const { PORT, mongoDBURL } = require('./config');
 const User = require('./models/User');
 const app = express();
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwtBlacklist = new Set();
 const MongoStore = require('connect-mongo');
 const crypto = require('crypto');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
-const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const passport = require('passport');
 const nodemailer = require('nodemailer');
 const path = require('path')
@@ -50,30 +49,6 @@ passport.use(new LocalStrategy(
     }
   ));
 
-const GOOGLE_CLIENT_ID = '252402982670-m27bor9gt5ftianv61t1eicjq9fn2uar.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = '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';
-
-passport.use(new GoogleStrategy({
-  clientID: GOOGLE_CLIENT_ID,
-  clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: 'http://localhost:7000/auth/google/callback',
-  passReqToCallback: true
-}, async (request, accessToken, refreshToken, profile, done) => {
-  try {
-    let user = await User.findOne({ googleId: profile.id });
-    if (!user) {
-      user = new User({
-        googleId: profile.id,
-        email: profile.emails[0].value,
-        todos: []
-      });
-      await user.save();
-    }
-    return done(null, user);
-  } catch (err) {
-    return done(err);
-  }
-}));
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
