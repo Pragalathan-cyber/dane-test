@@ -42,7 +42,7 @@ function authenticateToken(req, res, next) {
 // POST /api/posts - Create a new post with image
 router.post('/', authenticateToken, upload.single('image'), async (req, res) => {
   const { content } = req.body;
-  const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;  // Get image path if uploaded
+  const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
   try {
     const user = await User.findById(req.user.userId);
@@ -51,21 +51,19 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Create a new post object
     const newPost = {
       content,
       imageUrl,
       postedBy: req.user.userId,
-      username: user.username // Include username of the user who created the post
+      username: user.username
     };
 
     user.posts.push(newPost);
     await user.save();
-    
-    // Return the new post object with populated username
+
     res.status(201).json({ post: newPost });
   } catch (err) {
-    console.error(err.message);
+    console.error('Error creating post:', err);
     res.status(500).json({ message: 'Server Error' });
   }
 });
