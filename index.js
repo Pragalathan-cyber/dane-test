@@ -16,7 +16,7 @@ const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const passport = require('passport');
 const nodemailer = require('nodemailer');
 const path = require('path')
-//** */ */
+//** */ *////***/
 mongoose.set('strictQuery', true);
 
 app.use(express.json());
