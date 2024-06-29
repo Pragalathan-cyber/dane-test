@@ -23,8 +23,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: 'https://dane-connect.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE','OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
