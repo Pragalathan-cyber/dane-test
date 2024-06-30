@@ -41,9 +41,8 @@ function authenticateToken(req, res, next) {
 }
 
 // POST /api/posts - Create a new post with image
-router.post('/', authenticateToken, upload.single('image'), async (req, res) => {
+router.post('/', authenticateToken, async (req, res) => {
   const { content } = req.body;
-  const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
   try {
     const user = await User.findById(req.user.userId);
@@ -54,7 +53,6 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
 
     const newPost = {
       content,
-      imageUrl,
       postedBy: req.user.userId,
       username: user.username
     };
