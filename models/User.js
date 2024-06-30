@@ -8,9 +8,6 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  imageUrl: {
-    type: String  // Optional field for image URL
-  },
   comments: [
     {
       text: {
@@ -36,9 +33,10 @@ const postSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    default: 'Unknown' // Default value for username if not explicitly set
+    default: 'Unknown'
   }
 });
+
 
 
 
