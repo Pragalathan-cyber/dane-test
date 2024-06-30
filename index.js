@@ -23,7 +23,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(
   cors({
-    origin: 'https://dane-connect.vercel.app',
+    origin: 'https://dane-connect-client.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE','OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
