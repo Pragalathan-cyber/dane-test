@@ -159,7 +159,7 @@ passport.serializeUser((user, done) => {
         subject: 'Password Reset Request',
         text: `You are receiving this email because you (or someone else) have requested to reset the password for your account.\n\n`
           + `Please click on the following link, or paste this into your browser to complete the process:\n\n`
-          + `http://localhost:5173/reset-password/${user.resetPasswordToken}\n\n`
+          + `https://dane-connect-client.vercel.app/reset-password/${user.resetPasswordToken}\n\n`
           + `If you did not request this, please ignore this email and your password will remain unchanged.\n`
       };
   
